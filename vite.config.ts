@@ -3,25 +3,20 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
+// ✅ Updated config for Vercel
 export default defineConfig(({ mode }) => ({
-  // ✅ Dynamic base path: '/' for dev, '/vignesh-portfolio/' for GitHub Pages
-  base: mode === 'development' ? '/' : '/vignesh-portfolio/',
-
+  base: "/", // <-- this is the key fix
   server: {
     host: "::",
     port: 8080,
   },
-
   plugins: [
     react(),
-    mode === 'development' && componentTagger(),
+    mode === "development" && componentTagger(),
   ].filter(Boolean),
-
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
 }));
-
